@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+message_file = ARGV[0]
+message = File.read(message_file)
+
+case
+when /^[a-z\s]/.match(message)
+  puts "[POLICY] Messages must start with a capital letter"
+  exit 1
+when !/^.{3,50}$/.match(message)
+  puts "[POLICY] Commit messages must be shorter than 50 chars"
+  exit 1
+when /\.$/.match(message)
+  puts "[POLICY] Commit messages should not end with a fullstop"
+  exit 1
+end
